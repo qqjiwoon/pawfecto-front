@@ -1,20 +1,21 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-
-</script>
-
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-      </nav>
-    </div>
-  </header>
+  <div id="app">
+    <!-- 공통 헤더 -->
+    <Header />
 
-  <RouterView />
+    <!-- 페이지 내용 -->
+    <RouterView />
+
+    <!-- 공통 푸터 -->
+    <Footer />
+  </div>
 </template>
+
+<script setup>
+import { RouterView } from 'vue-router'
+import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+</script>
 
 <style scoped>
 
