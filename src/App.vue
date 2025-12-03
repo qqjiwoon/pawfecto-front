@@ -23,9 +23,10 @@ import Footer from '@/components/Footer.vue'
 
 <style scoped>
 .pf-container {
-  max-width: 1200px;    /* 전체 페이지 공통 폭 */
-  margin: 0 auto;       /* 가운데 정렬 */
-  padding: 0 32px;      /* 좌우 여백 통일 */
+  /* max-width: 1200px;    /* 전체 페이지 공통 폭 */ 
+  /* margin: 0 auto;       /* 가운데 정렬 */
+  /* padding: 0 32px;      /* 좌우 여백 통일 */
   width: 100%;
 }
+
 </style>

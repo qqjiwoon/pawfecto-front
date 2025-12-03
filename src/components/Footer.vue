@@ -21,7 +21,7 @@
 
 <style scoped>
 .pf-footer {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 48px 32px;
   display: flex;
