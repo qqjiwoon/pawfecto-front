@@ -1,46 +1,49 @@
 <template>
-    <div class="pf-login">
-        <!-- Hero -->
-        <section class="pf-login-hero">
-        <div class="pf-login-hero-overlay"></div>
+  <div class="pf-login">
 
-        <h1 class="pf-login-hero-title">Pawfecto</h1>
+    <!-- Hero -->
+    <section class="pf-login-hero">
+      <div class="pf-login-hero-overlay"></div>
 
-        <div class="pf-login-breadcrumb">
+      <h1 class="pf-login-hero-title">Pawfecto</h1>
+
+      <div class="pf-login-breadcrumb">
         <p>Home</p>
         <span> &gt; </span>
         <p>Login</p>
+      </div>
+    </section>
+
+    <!-- 로그인 폼 영역 -->
+    <section class="pf-login-form-section">
+
+      <h2 class="pf-login-title">로그인</h2>
+      <p class="pf-login-desc">
+        협찬, 이제는 복잡하지 않게<br />
+        반려동물 인플루언서를 위한 완벽한 매칭 — Pawfecto
+      </p>
+
+      <form class="pf-login-form">
+        <label>아이디</label>
+        <input type="text" placeholder="Abc1234" />
+
+        <label>비밀번호</label>
+        <input type="password" placeholder="Abc1234" />
+
+        <div class="pf-login-signup">
+          계정이 없으신가요?
+          <router-link to="/signup/brand">회원가입 하러가기</router-link>
         </div>
-        </section>
 
-        <!-- 로그인 폼 영역 -->
-        <section class="pf-login-form-section">
+        <button class="pf-login-instagram">
+          <img src="@/assets/instagram-icon.png" alt="instagram" />
+          Log in with Instagram
+        </button>
+      </form>
 
-        <h2 class="pf-login-title">로그인</h2>
-        <p class="pf-login-desc">
-            협찬, 이제는 복잡하지 않게<br />
-            반려동물 인플루언서를 위한 완벽한 매칭 — Pawfecto
-        </p>
+    </section>
 
-        <form class="pf-login-form">
-            <label>아이디</label>
-            <input type="text" placeholder="Abc1234" />
-
-            <label>비밀번호</label>
-            <input type="password" placeholder="Abc1234" />
-
-            <div class="pf-login-signup">
-            계정이 없으신가요?
-            <router-link to="/signup/brand">회원가입 하러가기</router-link>
-            </div>
-
-            <button class="pf-login-instagram">
-            <img src="@/assets/instagram-icon.png" alt="instagram" />
-            Log in with Instagram
-            </button>
-        </form>
-        </section>
-    </div>
+  </div>
 </template>
 
 <script setup>
@@ -132,6 +135,7 @@ import { RouterLink } from 'vue-router'
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
+  box-sizing: border-box; /* 입력창도 정확한 360px 유지 */
 }
 
 .pf-login-signup {
@@ -150,6 +154,7 @@ import { RouterLink } from 'vue-router'
 .pf-login-instagram {
   margin-top: 12px;
   width: 100%;
+  box-sizing: border-box; /* 버튼 폭 = 360px로 정확히 통일 */
   background-color: #ffffff;
   border: 1px solid #ddd;
   padding: 14px;
