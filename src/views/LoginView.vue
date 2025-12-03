@@ -31,7 +31,7 @@
 
             <div class="pf-login-signup">
             계정이 없으신가요?
-            <router-link to="/signup">회원가입 하러가기</router-link>
+            <router-link to="/signup/brand">회원가입 하러가기</router-link>
             </div>
 
             <button class="pf-login-instagram">
