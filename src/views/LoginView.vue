@@ -92,6 +92,14 @@ import { RouterLink } from 'vue-router'
   font-size: 14px;
   display: flex;
   gap: 6px;
+
+  font-family: inherit; /* Rubik Bubbles 상속 방지 */
+}
+
+.pf-login-breadcrumb p,
+.pf-login-breadcrumb span {
+  margin: 0;
+  padding: 0;
 }
 
 /* ----------------- Form 영역 ----------------- */
