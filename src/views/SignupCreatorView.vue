@@ -231,9 +231,16 @@ watch(
   font-weight: 500;
 }
 
-.form-group input,
-.form-group select {
+.form-group input {
   width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.form-group select {
+  width: 105%;
   padding: 12px;
   border-radius: 8px;
   border: 1px solid #ddd;
@@ -285,7 +292,7 @@ watch(
 }
 
 .submit-btn {
-  width: 100%;
+  width: 105%;
   padding: 14px;
   margin-top: 50px;
   background: #000;
