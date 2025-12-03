@@ -149,7 +149,7 @@ import { RouterLink } from 'vue-router'
 /* Instagram 로그인 버튼 */
 .pf-login-instagram {
   margin-top: 12px;
-  width: 100%;
+  width: 109%;
   background-color: #ffffff;
   border: 1px solid #ddd;
   padding: 14px;
