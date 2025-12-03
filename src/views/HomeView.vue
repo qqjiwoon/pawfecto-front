@@ -1,10 +1,11 @@
 <template>
   <div class="pf-home">
 
-    <!-- Hero 영역 (LoginView와 동일한 구조) -->
-    <section class="pf-home-hero">
+    <!-- Hero 영역 -->
+    <div class="pf-home-hero">
+      <img src="@/assets/home-hero.png" alt="hero image" class="pf-home-hero-img" />
       <div class="pf-home-hero-overlay"></div>
-    </section>
+    </div>
 
   </div>
 </template>
@@ -22,17 +23,22 @@
 /* ----------------- Hero 영역 ----------------- */
 .pf-home-hero {
   width: 100%;
-  height: 70vh;                            /* 기존과 동일 높이 */
-  background-image: url('@/assets/home-hero.png');
-  background-size: cover;                  /* 화면에 꽉 차게 */
-  background-position: center;             /* 가운데 정렬 */
-  position: relative;
+  position: relative;   /* overlay를 위해 필요 */
+  overflow: hidden;     /* 확대될 때 넘침 방지 */
 }
 
-/* 밝기 조절 overlay (원하는 정도로 변경 가능) */
+/* 이미지 원본 비율 유지 + 가로 꽉 채우기 */
+.pf-home-hero-img {
+  width: 100%;
+  height: auto;         /* 이미지 실제 비율 유지 (핵심 포인트) */
+  display: block;       /* 불필요한 하단 여백 제거 */
+}
+
+/* 밝기 조절 overlay */
 .pf-home-hero-overlay {
   position: absolute;
   inset: 0;
-  background-color: rgba(255, 255, 255, 0.2); /* 0.2~0.3 사이 추천 */
+  background-color: rgba(255, 255, 255, 0.2); /* 밝기 유지 */
+  pointer-events: none; /* overlay가 클릭 막지 않도록 */
 }
 </style>
