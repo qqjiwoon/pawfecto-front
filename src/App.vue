@@ -2,9 +2,7 @@
 
   <div id="app">
     <!-- 공통 헤더 -->
-    <header class="pf-container">
-      <Header />
-    </header>
+    <Header />
 
     <!-- 페이지 내용 -->
     <main class="pf-container">
@@ -12,9 +10,8 @@
     </main>
 
     <!-- 공통 푸터 -->
-    <footer class="pf-container">
-      <Footer />
-    </footer>
+    <Footer />
+
   </div>
 </template>
 
