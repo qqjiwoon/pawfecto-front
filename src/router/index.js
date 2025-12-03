@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import SignupBrandView from '../views/SignupBrandView.vue'
 import SignupCreatorView from '../views/SignupCreatorView.vue'
+import BrandDashboardView from '@/views/BrandDashboardView.vue'
+import CreatorDashboardView from '@/views/CreatorDashboardView.vue'
 
 
 const router = createRouter({
@@ -27,7 +29,17 @@ const router = createRouter({
       path: '/signup/creator',
       name: 'signup-creator',
       component: SignupCreatorView,
-    },  
+    }, 
+    {
+      path: '/dashboard/brand',
+      name: 'dashboard-brand',
+      component: BrandDashboardView,
+    },
+    {
+      path: '/dashboard/creator',
+      name: 'dashboard-creator',
+      component: CreatorDashboardView,
+    },
   ],
 })
 
