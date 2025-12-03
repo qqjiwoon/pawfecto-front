@@ -1,7 +1,9 @@
 <template>
+
   <div id="app">
     <!-- 공통 헤더 -->
     <Header />
+
 
     <!-- 페이지 내용 -->
     <RouterView />
