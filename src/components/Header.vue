@@ -25,7 +25,7 @@
 
 <style scoped>
 .pf-header {
-  max-width: 1200px;
+  /* max-width: 1200px; */
   height: 70px;
   margin: 0 auto;
   padding: 0 32px;
