@@ -1,61 +1,74 @@
 <template>
     <div class="brand-header">
-        <div class="brand-info-wrap">
+        <div class="brand-info">
             <img class="profile-img" src="@/assets/instagram-icon.png" alt="brand">
+            <div class="text-wrap">
+                <h2 class="brand-name">{{ brandName }}</h2>
+                <p class="brand-desc">{{ brandDescription }}</p>
+            </div>
         </div>
-        <div class="text-wrap">
-            <h2 class="brand-name">Brand</h2>
-            <p class="brand-desc">Campaign for Cats | Handmade Product</p>
+
+        <div class="btn-wrap">
+            <button class="btn-primary" @click="goCreate">create campaign</button>
+            <button class="btn-secondary">setting</button>
         </div>
-    </div>
-    <div class="btn-wrap">
-        <button class="btn-primary">create campaign</button>
-        <button class="btn-secondary">setting</button>
     </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
+
+const props = defineProps({
+  brandName: String,
+  brandDescription: String
+})
+
+function goCreate(){
+  router.push({ name: 'create-campaign'})
+}
 
 </script>
 
 <style scoped>
+
 .brand-header {
   width: 100%;
-  max-width: 900px;
+  max-width: 800px;
   margin: 50px auto 40px;
+
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 20px;
+  flex-direction: column; 
+  align-items: center;    
+  gap: 25px;
 }
 
-.brand-info-wrap {
+
+.brand-info {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 18px;
+  gap: 15px;
 }
 
 .profile-img {
-  width: 85px;
-  height: 85px;
+  width: 95px;
+  height: 95px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.text-wrap {
-  display: flex;
-  flex-direction: column;
-}
-
 .brand-name {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
+  text-align: center;
 }
 
 .brand-desc {
   margin-top: 4px;
   font-size: 14px;
   color: #666;
+  text-align: center;
 }
 
 .btn-wrap {
@@ -73,8 +86,8 @@
 
 .btn-primary {
   border: none;
-  background: #000;
-  color: white;
+  background: #E9EAEB;
+  color: black;
 }
 
 .btn-secondary {

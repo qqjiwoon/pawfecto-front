@@ -3,9 +3,10 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import SignupBrandView from '../views/SignupBrandView.vue'
 import SignupCreatorView from '../views/SignupCreatorView.vue'
+import BrandLayout from '@/views/BrandLayout.vue'
 import BrandDashboardView from '@/views/BrandDashboardView.vue'
 import CreatorDashboardView from '@/views/CreatorDashboardView.vue'
-
+import CreateCampaignView from '@/views/CreateCampaignView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,8 +33,19 @@ const router = createRouter({
     }, 
     {
       path: '/dashboard/brand',
-      name: 'dashboard-brand',
-      component: BrandDashboardView,
+      component: BrandLayout,          
+      children: [
+        {
+          path: '',
+          name: 'brand-dashboard',
+          component: BrandDashboardView   
+        },
+        {
+          path: 'create',
+          name: 'create-campaign',
+          component: CreateCampaignView   
+        }
+      ]
     },
     {
       path: '/dashboard/creator',
