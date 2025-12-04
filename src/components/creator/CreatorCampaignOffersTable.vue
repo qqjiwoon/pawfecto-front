@@ -27,37 +27,37 @@
 
       <tbody>
         <tr v-for="offer in paginatedOffers" :key="offer.id">
-          <!-- <td><input type="checkbox" /></td> -->
-
-          <td class="brand-col">
-            <img :src="offer.brand_image" class="brand-img" />
-            <span>{{ offer.brand_name }}</span>
+          <td>
+            <div class="brand-col">
+              <img :src="offer.brand_image" class="brand-img" />
+              <span>{{ offer.brand_name }}</span>
+            </div>
           </td>
 
           <td>{{ offer.product_name }}</td>
           <td>{{ offer.min_follower_count }}</td>
 
-          <td class="style-col">
-            <span
-              v-for="style in offer.styles"
-              :key="style"
-              class="style-tag"
-            >
-              #{{ style }}
-            </span>
+          <td>
+            <div class="style-col">
+              <span
+                v-for="style in offer.styles"
+                :key="style"
+                class="style-tag"
+              >
+                #{{ style }}
+              </span>
+            </div>
           </td>
 
           <td>{{ offer.start_date }}</td>
           <td>{{ offer.end_date }}</td>
 
-          <!-- 상태 변경 가능 UI -->
           <td class="status-col">
             <div class="status-wrapper" @click.stop="toggleDropdown(offer.id)">
               <span :class="['status', offer.status]">
                 {{ toKoreanStatus(offer.status) }}
               </span>
 
-              <!-- Dropdown -->
               <div 
                 v-if="openDropdownId === offer.id"
                 class="dropdown"
@@ -325,7 +325,7 @@ const offers = ref([
 
 const searchQuery = ref("")
 const currentPage = ref(1)
-const itemsPerPage = 10
+const itemsPerPage = 6
 
 // 검색 필터
 const filteredOffers = computed(() => {
@@ -362,9 +362,9 @@ const nextPage = () => {
 
 .offers-table {
   width: 100%;
-  max-width: 1200px;   /* ⭐ 최대 폭 제한 */
-  margin: 0 auto;       /* ⭐ 가운데 정렬 */
-  padding: 0 32px;      /* ⭐ 좌우 여백 */
+  max-width: 1200px;   /* 최대 폭 제한 */
+  margin: 0 auto;       /* 가운데 정렬 */
+  padding: 0 32px;      /* 좌우 여백 */
   box-sizing: border-box;
 }
 
@@ -419,9 +419,14 @@ th {
   color: #777;
 }
 
+tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+}
+
 td {
   padding: 18px 16px;
-  border-bottom: 1px solid #f0f0f0;
+  border: none;
+  vertical-align: middle;
 }
 
 
@@ -443,6 +448,7 @@ td {
 .style-col {
   display: flex;
   gap: 6px;
+  align-items: center;
 }
 
 .style-tag {

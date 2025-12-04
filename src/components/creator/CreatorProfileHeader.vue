@@ -22,21 +22,21 @@
     <!-- 인스타그램 통계 -->
     <div class="creator-stats">
       <div class="stat-item">
-        <p class="number">{{ creator.total_post_count }}</p>
+        <p class="number">{{ Number(creator.total_post_count).toLocaleString() }}</p>
         <span>Posts</span>
       </div>
 
       <div class="divider"></div>
 
       <div class="stat-item">
-        <p class="number">{{ creator.follower_count }}</p>
+        <p class="number">{{ Number(creator.follower_count).toLocaleString() }}</p>
         <span>Followers</span>
       </div>
 
       <div class="divider"></div>
 
       <div class="stat-item">
-        <p class="number">{{ creator.following_count || 0 }}</p>
+        <p class="number">{{ Number(creator.following_count).toLocaleString() || 0 }}</p>
         <span>Following</span>
       </div>
     </div>
@@ -127,44 +127,48 @@ const activeBtn = ref('campaigns')
 
 /* 인스타그램 통계 영역 */
 .creator-stats {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr; /* stat-div-stat-div-stat */
   align-items: center;
-  margin-top: 28px;
-  gap: 40px;
+
+  max-width: 500px;  /* 화면 크기와 상관없이 고정 폭 */
+  margin: 28px auto 0 auto; /* 가운데 정렬 */
+  column-gap: 40px; /* stat-item 간 일정 간격 유지 */
 }
 
 .stat-item {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .stat-item .number {
   font-size: 26px;
   font-weight: 600;
   color: #000;
+  margin: 0;
 }
 
 .stat-item span {
   font-size: 14px;
   color: #777;
-  display: block;
-  margin-top: 4px;
+  margin-bottom: 10px;
 }
 
 /* 세로 구분선 */
 .divider {
   width: 1px;
-  height: 40px;
+  height: 100%;   /* grid에서 stat-item 높이에 자동 맞춤 */
   background-color: #ccc;
 }
 
-
 /* 버튼 영역 */
 .btn-wrap {
-  margin-top: 24px;
+  margin-top: 90px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 50px;
 }
 
 /* 기본 버튼 스타일 */
@@ -177,6 +181,7 @@ const activeBtn = ref('campaigns')
   border: 1px solid #d3d3d3;
   color: #444;
   transition: all 0.15s ease;
+  width: 250px;
 }
 
 /* 선택된 버튼 */
