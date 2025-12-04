@@ -4,12 +4,14 @@
     <!-- 공통 헤더 -->
     <Header />
 
-
     <!-- 페이지 내용 -->
-    <RouterView />
+    <main class="pf-container">
+      <RouterView />
+    </main>
 
     <!-- 공통 푸터 -->
     <Footer />
+
   </div>
 </template>
 
@@ -20,5 +22,11 @@ import Footer from '@/components/Footer.vue'
 </script>
 
 <style scoped>
+.pf-container {
+  /* max-width: 1200px;    /* 전체 페이지 공통 폭 */ 
+  /* margin: 0 auto;       /* 가운데 정렬 */
+  /* padding: 0 32px;      /* 좌우 여백 통일 */
+  width: 100%;
+}
 
 </style>

@@ -21,13 +21,15 @@
 
 <style scoped>
 .pf-footer {
-  width: 100%;
-  padding: 48px 80px;
-  background-color: #ffffff;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  padding: 48px 32px;
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
+  justify-content: space-between;
+  background-color: #ffffff;
   border-top: 1px solid #eaeaea;
+  position: relative;
 }
 
 .pf-footer-left {
