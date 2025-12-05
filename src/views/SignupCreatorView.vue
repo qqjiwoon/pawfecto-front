@@ -1,4 +1,15 @@
 <template>
+  <section class="pf-signup-hero">
+    <div class="pf-signup-hero-overlay"></div>
+
+    <h1 class="pf-signup-hero-title">Pawfecto</h1>
+
+    <div class="pf-signup-breadcrumb">
+      <p>Home</p>
+      <span> &gt; </span>
+      <p>Signup</p>
+    </div>
+  </section>
   <div class="signup-container">
 
     <h1>Creator Signup</h1>
@@ -23,7 +34,7 @@
     <form @submit.prevent="handleSignup">
       <div class="form-group">
         <label>아이디</label>
-        <input type="text" v-model="form.loginId" required />
+        <input type="text" v-model="form.signupId" required />
       </div>
 
       <div class="form-group">
@@ -83,25 +94,16 @@
       <div class="form-group">
         <label>SNS 스타일</label>
 
-        <div class="tag-options">
-            <span
-            v-for="tag in styleOptions"
-            :key="tag.value"
-            class="tag-chip"
-            :class="{ selected: form.styleTags.includes(tag.value) }"
-            @click="toggleTag(tag.value)"
-            >
-            {{ tag.label }}
-            </span>
-        </div>
-        <div class="selected-tags" v-if="form.styleTags.length > 0">
-            <span
-            v-for="tag in form.styleTags"
+        <div class="tag-container">
+          <div
+            v-for="tag in styleTags"
             :key="tag"
-            class="selected-item"
-            >
-            #{{ getLabel(tag) }}
-            </span>
+            class="tag"
+            :class="{ active: selectedTags.includes(tag) }"
+            @click="toggleTag(tag)"
+          >
+            #{{ tag }}
+          </div>
         </div>
     </div>  
 
@@ -124,7 +126,7 @@ const router = useRouter()
 
 const form = ref({
     accountType: 'creator',
-    loginId: '',
+    signupId: '',
     password: '',
     passwordConfirm: '',
     brandName: '',
@@ -143,28 +145,21 @@ const handleFileUpload = (e) => {
   form.value.profileImage = e.target.files[0]
 }
 
-const styleOptions = [
-  { value: 'outdoor', label: '아웃도어' },
-  { value: 'energetic', label: '활발함' },
-  { value: 'minimal', label: '미니멀' },
-  { value: 'aesthetic', label: '감성' },
-  { value: 'heartfelt', label: '따뜻함' },
-  { value: 'funny', label: '재미있음' },
+const styleTags = [
+  '활발한', '야외감성', '차분한', '웃긴', '힐링되는', '포근한',
+  '감동적인', '감각적인', '깔끔한', '상관없음'
 ]
 
-const toggleTag = (tagValue) => {
-  const index = form.value.styleTags.indexOf(tagValue)
+/* 클릭된 태그 저장 */
+const selectedTags = ref([])
 
-  if (index === -1) {
-    form.value.styleTags.push(tagValue) // 선택
+/* 토글 기능 */
+function toggleTag(tag) {
+  if (selectedTags.value.includes(tag)) {
+    selectedTags.value = selectedTags.value.filter(t => t !== tag)
   } else {
-    form.value.styleTags.splice(index, 1) // 해제
+    selectedTags.value.push(tag)
   }
-}
-
-const getLabel = (value) => {
-  const found = styleOptions.find(tag => tag.value === value)
-  return found ? found.label : value
 }
 
 const handleSignup = (() =>{
@@ -185,6 +180,50 @@ watch(
 </script>
 
 <style scoped>
+
+.pf-signup-hero {
+  width: 100%;
+  height: 45vh;
+  background-image: url('@/assets/login-hero.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.pf-signup-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.pf-signup-hero-title {
+  position: absolute;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Rubik Bubbles', sans-serif;
+  font-size: 54px;
+  color: #fff;
+}
+
+.pf-signup-breadcrumb {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  gap: 6px;
+
+  font-family: inherit; /* Rubik Bubbles 상속 방지 */
+}
+
+.pf-signup-breadcrumb p,
+.pf-signup-breadcrumb span {
+  margin: 0;
+  padding: 0;
+}
 
 .signup-container {
   max-width: 480px;
@@ -253,49 +292,36 @@ watch(
   border-color: #000;
 }
 
-.tag-options {
+.tag-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
+  gap: 10px;
 }
 
-.tag-chip {
-  padding: 8px 14px;
+/* 일반 태그 스타일 */
+.tag {
+  padding: 8px 16px;
+  border-radius: 10px;
+  background: #f7f7f7;
   border: 1px solid #ddd;
-  border-radius: 20px;
-  background: #f8f8f8;
   cursor: pointer;
   font-size: 14px;
-  user-select: none;
+  color: #333;
   transition: 0.2s;
 }
 
-.tag-chip:hover {
-  background: #eee;
-}
-
-.tag-chip.selected {
-  background: #000;
-  color: #fff;
-  border-color: #000;
-}
-
-.selected-tags {
-  margin-top: 12px;
-}
-
-.selected-item {
-  margin-right: 10px;
-  font-size: 14px;
-  color: #333;
+/* 선택된 태그 스타일 */
+.tag.active {
+  background: #7E6B5A;
+  color: white;
+  border-color: #7E6B5A;
 }
 
 .submit-btn {
   width: 105%;
   padding: 14px;
   margin-top: 50px;
-  background: #000;
+  background: #7b7b7b;
   color: white;
   border: none;
   border-radius: 8px;
@@ -305,7 +331,7 @@ watch(
 }
 
 .submit-btn:hover {
-  background: #222;
+  background: #3A3A3A;
 }
 
 </style>

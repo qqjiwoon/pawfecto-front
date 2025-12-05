@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="goDetail" >
     <img :src="campaign.image" class="card-img" alt="campaign">
 
     <div class="card-body">
@@ -11,9 +11,19 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
+
 const props = defineProps({
   campaign: Object
 })
+
+const router = useRouter()
+function goDetail(){
+  router.push({
+    name:'campaign-detail',
+    params: { id: props.campaign.id}
+  })
+}
 </script>
 
 <style scoped>
