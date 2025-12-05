@@ -1,7 +1,6 @@
 <template>
   <div class="create-campaign-page">
 
-    <!-- 제목 -->
     <h1 class="title">Create Campaign</h1>
 
     <!-- Product Section -->

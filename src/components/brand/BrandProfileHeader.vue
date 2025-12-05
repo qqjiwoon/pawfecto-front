@@ -7,11 +7,6 @@
                 <p class="brand-desc">{{ brandDescription }}</p>
             </div>
         </div>
-
-        <div class="btn-wrap">
-            <button class="btn-primary" @click="goCreate">create campaign</button>
-            <button class="btn-secondary">setting</button>
-        </div>
     </div>
 </template>
 
@@ -24,74 +19,48 @@ const props = defineProps({
   brandDescription: String
 })
 
-function goCreate(){
-  router.push({ name: 'create-campaign'})
-}
-
 </script>
 
 <style scoped>
-
 .brand-header {
   width: 100%;
   max-width: 800px;
-  margin: 50px auto 40px;
-
+  margin: -80px auto 40px; /* ⬅ 히어로 위로 끌어올리는 핵심 */
   display: flex;
   flex-direction: column; 
-  align-items: center;    
+  align-items: center;
   gap: 25px;
+  position: relative;
 }
-
-
 .brand-info {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 15px;
+  align-items: center; /* <-- 이미지 + 텍스트 모두 가운데 정렬 */
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .profile-img {
-  width: 95px;
-  height: 95px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   object-fit: cover;
+  border: 4px solid white; 
 }
 
 .brand-name {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   text-align: center;
+  margin-top: 5px;
 }
 
 .brand-desc {
-  margin-top: 4px;
-  font-size: 14px;
-  color: #666;
+  margin-top: -8px;
+  font-size: 15px;
+  color: #777;
   text-align: center;
 }
 
-.btn-wrap {
-  display: flex;
-  gap: 12px;
-}
-
-.btn-primary,
-.btn-secondary {
-  padding: 10px 18px;
-  border-radius: 20px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.btn-primary {
-  border: none;
-  background: #E9EAEB;
-  color: black;
-}
-
-.btn-secondary {
-  border: 1px solid #ccc;
-  background: #fff;
-}
 </style>
