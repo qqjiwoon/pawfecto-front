@@ -32,7 +32,7 @@
       </thead>
 
       <tbody>
-        <tr v-for="creator in filteredCreators" :key="creator.id">
+          <tr v-for="creator in paginatedCreators" :key="creator.id">
           <td class="creator-cell">
             <img :src="creator.profileImg" class="profile-img" />
             <div>
@@ -61,11 +61,19 @@
       </tbody>
     </table>
 
+    <Pagination
+  :currentPage="currentPage"
+  :totalPages="totalPages"
+  @change-page="goToPage"
+/>
+
+
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import Pagination from './Pagination.vue'
 import defaultImg from '@/assets/profile.jpg'
 
 const creators = ref([
@@ -172,6 +180,24 @@ function filterCreators() {
     c.handle.toLowerCase().includes(k)
   )
 }
+
+const currentPage = ref(1)
+const itemsPerPage = 5
+
+const totalPages = computed(() =>
+  Math.ceil(filteredCreators.value.length / itemsPerPage)
+)
+
+const paginatedCreators = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage
+  return filteredCreators.value.slice(start, start + itemsPerPage)
+})
+
+function goToPage(page) {
+  currentPage.value = page
+}
+
+
 </script>
 
 <style scoped>
@@ -187,31 +213,39 @@ function filterCreators() {
 }
 
 .search-box {
-  width: 280px;
-  margin: 0 auto 20px;
   display: flex;
-  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-left: auto; /* 오른쪽 정렬 */
 }
 
 .search-box input {
   flex: 1;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 14px;
+  padding: 6px 2px;
 }
 
 .search-btn {
-  padding: 8px 12px;
+  background: none;
   border: none;
-  background: #ddd;
-  border-radius: 8px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .no-result {
-  margin-top: 20px;
+  text-align: center;
+  padding: 20px;
+  color: #888;
   font-size: 15px;
-  color: #666;
 }
 
 .creator-table {
