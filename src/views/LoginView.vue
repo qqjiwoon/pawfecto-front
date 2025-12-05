@@ -25,10 +25,13 @@
 
       <form class="pf-login-form">
         <label>아이디</label>
-        <input type="text" placeholder="Abc1234" />
+        <input type="text" placeholder="Abc1234" v-model="username" />
 
         <label>비밀번호</label>
-        <input type="password" placeholder="Abc1234" />
+        <input type="password" placeholder="Abc1234" v-model="password" />
+
+        <!-- 로그인 버튼 -->
+        <button class="pf-login-submit" @click.prevent="handleLogin">로그인</button>
 
         <div class="pf-login-signup">
           계정이 없으신가요?
@@ -48,7 +51,31 @@
 
 <script setup>
 import { RouterLink } from 'vue-router'
+import { useRouter } from 'vue-router'
+import { ref } from 'vue'
+
+const router = useRouter()
+
+const username = ref('')
+const password = ref('')
+
+const handleLogin = () => {
+  if (!username.value.trim()) {
+    alert('아이디를 입력해주세요.')
+    return
+  }
+
+  if (!password.value.trim()) {
+    alert('비밀번호를 입력해주세요.')
+    return
+  }
+
+  // 로그인 성공 → 홈으로 이동
+  router.push('/')
+}
 </script>
+
+
 
 <style scoped>
 /* 전체 페이지 */
@@ -144,6 +171,20 @@ import { RouterLink } from 'vue-router'
   border-radius: 8px;
   font-size: 14px;
   box-sizing: border-box; /* 입력창도 정확한 360px 유지 */
+}
+
+/* 로그인 버튼 */
+.pf-login-submit {
+  width: 100%;
+  padding: 14px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 400;
+  cursor: pointer;
+  margin-top: 16px;
 }
 
 .pf-login-signup {
