@@ -1,35 +1,37 @@
 <template>
   <div class="tabs">
     
-    <div 
+    <!-- Campaign Offers -->
+    <router-link
+      to="/dashboard/creator/campaign-offers"
       class="tab-item"
-      :class="{ active: activeTab === 'offers' }"
-      @click="$emit('change-tab', 'offers')"
+      :class="{ active: isActive('/dashboard/creator/campaign-offers') }"
     >
       Campaign Offers
-    </div>
+    </router-link>
 
-    <div 
+    <!-- Campaign Progress -->
+    <router-link
+      to="/dashboard/creator/campaign-progress"
       class="tab-item"
-      :class="{ active: activeTab === 'progress' }"
-      @click="$emit('change-tab', 'progress')"
+      :class="{ active: isActive('/dashboard/creator/campaign-progress') }"
     >
       Campaign Progress
-    </div>
+    </router-link>
 
   </div>
 </template>
 
-
 <script setup>
-const props = defineProps({
-  activeTab: {
-    type: String,
-    required: true
-  }
-})
-</script>
+import { useRoute } from 'vue-router'
 
+const route = useRoute()
+
+// 현재 경로가 탭의 경로와 일치하면 active 처리
+const isActive = (path) => {
+  return route.path.startsWith(path)
+}
+</script>
 
 <style scoped>
 .tabs {
@@ -45,12 +47,13 @@ const props = defineProps({
   position: relative;
   font-size: 18px;
   padding-bottom: 3px;
-  color: #8a8a8a; /* 기본 회색 */
+  color: #8a8a8a; 
   cursor: pointer;
+  text-decoration: none;       /* router-link 기본 밑줄 제거 */
   transition: all 0.2s ease;
 }
 
-/* 아래 라인 (기본: 연한 회색) */
+/* 기본 밑줄 */
 .tab-item::after {
   content: '';
   position: absolute;
@@ -63,13 +66,13 @@ const props = defineProps({
   transition: all 0.2s ease;
 }
 
-/* 활성 탭 스타일 */
+/* 활성 탭 글씨 */
 .tab-item.active {
-  color: #333; /* 글씨 색 진하게 */
+  color: #333;
   font-weight: 600;
 }
 
-/* 활성 탭의 밑줄 */
+/* 활성 탭 밑줄 */
 .tab-item.active::after {
   background-color: #333;
   width: 250px;

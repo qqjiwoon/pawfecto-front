@@ -45,27 +45,14 @@
           </td>
           
           <td class="status-col">
-            <div class="status-wrapper" @click.stop="toggleDropdown(item.id)">
-              
-              <div class="status-badge pointer">
+            <div class="status-wrapper">
+              <div
+                class="status-badge pointer"
+                @click="openEditModal(item)"
+              >
                 <span :class="['dot', item.status]"></span>
                 <span class="status-text">{{ toKoreanStatus(item.status) }}</span>
               </div>
-
-              <div 
-                v-if="openDropdownId === item.id"
-                class="dropdown"
-              >
-                <div
-                  class="dropdown-item"
-                  v-for="s in statusOptions"
-                  :key="s"
-                  @click="(event) => changeStatus(item.id, s, event)"
-                >
-                  {{ toKoreanStatus(s) }}
-                </div>
-              </div>
-
             </div>
           </td>
 
@@ -95,10 +82,38 @@
     </div>
 
   </div>
+  <ProgressEditModal
+  v-if="isModalOpen"
+  :item="editingItem"
+  @save="saveEditedItem"
+  @close="isModalOpen = false"
+  />
+
 </template>
 
 <script setup>
 import { ref, computed } from 'vue'
+
+// 모달
+import ProgressEditModal from '@/components/creator/ProgressEditModal.vue'
+const isModalOpen = ref(false)
+const editingItem = ref(null)
+
+const openEditModal = (item) => {
+  editingItem.value = { ...item }
+  isModalOpen.value = true
+}
+
+const saveEditedItem = (updated) => {
+  const target = progressData.value.find(i => i.id === updated.id)
+  if (target) {
+    target.upload_date = updated.upload_date
+    target.post_link = updated.post_link
+    target.status = updated.status
+  }
+  isModalOpen.value = false
+}
+
 
 /* ------------------------------
    1. 더미 데이터
@@ -110,7 +125,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=101",
     upload_date: "2025-11-25",
     post_link: "https://www.instagram.com/p/dogfood01",
-    status: "complete"
+    status: "completed"
   },
   {
     id: 2,
@@ -118,7 +133,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=102",
     upload_date: "2025-11-24",
     post_link: "https://www.instagram.com/p/pawbalm02",
-    status: "complete"
+    status: "completed"
   },
   {
     id: 3,
@@ -126,7 +141,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=103",
     upload_date: "",
     post_link: "",
-    status: "incomplete"
+    status: "incompleted"
   },
   {
     id: 4,
@@ -134,7 +149,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=104",
     upload_date: "2025-11-20",
     post_link: "https://www.instagram.com/p/harness03",
-    status: "complete"
+    status: "completed"
   },
   {
     id: 5,
@@ -142,7 +157,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=105",
     upload_date: "",
     post_link: "",
-    status: "incomplete"
+    status: "incompleted"
   },
   {
     id: 6,
@@ -150,7 +165,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=106",
     upload_date: "2025-11-18",
     post_link: "https://www.instagram.com/p/joint04",
-    status: "complete"
+    status: "completed"
   },
   {
     id: 7,
@@ -158,7 +173,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=107",
     upload_date: "",
     post_link: "",
-    status: "incomplete"
+    status: "incompleted"
   },
   {
     id: 8,
@@ -166,7 +181,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=108",
     upload_date: "",
     post_link: "",
-    status: "incomplete"
+    status: "incompleted"
   },
   {
     id: 9,
@@ -174,7 +189,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=109",
     upload_date: "2025-11-22",
     post_link: "https://www.instagram.com/p/dogbed05",
-    status: "complete"
+    status: "completed"
   },
   {
     id: 10,
@@ -182,7 +197,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=110",
     upload_date: "",
     post_link: "",
-    status: "incomplete"
+    status: "incompleted"
   },
   {
     id: 11,
@@ -190,7 +205,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=111",
     upload_date: "2025-11-16",
     post_link: "https://www.instagram.com/p/shampoo06",
-    status: "complete"
+    status: "completed"
   },
   {
     id: 12,
@@ -198,7 +213,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=112",
     upload_date: "",
     post_link: "",
-    status: "incomplete"
+    status: "incompleted"
   },
   {
     id: 13,
@@ -206,7 +221,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=113",
     upload_date: "2025-11-21",
     post_link: "https://www.instagram.com/p/ledcollar07",
-    status: "complete"
+    status: "completed"
   },
   {
     id: 14,
@@ -214,7 +229,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=114",
     upload_date: "",
     post_link: "",
-    status: "incomplete"
+    status: "incompleted"
   },
   {
     id: 15,
@@ -222,7 +237,7 @@ const progressData = ref([
     campaign_image: "https://picsum.photos/50?random=115",
     upload_date: "2025-11-23",
     post_link: "https://www.instagram.com/p/dogvest08",
-    status: "complete"
+    status: "completed"
   }])
 
 /* ------------------------------
@@ -256,49 +271,20 @@ const displayedPages = computed(() => {
 const prevPage = () => { if (currentPage.value > 1) currentPage.value-- }
 const nextPage = () => { if (currentPage.value < totalPages.value) currentPage.value++ }
 
-const formatStatus = (status) => {
-  return status.charAt(0).toUpperCase() + status.slice(1)
-}
-
-
 /* ------------------------------
-   4. 상태 관련 로직 (Offers 코드 반영)
+   4. 상태 관련 로직
 ------------------------------ */
-
-// 1. 상태 텍스트 변환 (한글)
 const toKoreanStatus = (status) => {
   switch (status) {
-    case 'incomplete': return '미완료' // Progress에만 있는 상태가 있다면 추가
-    case 'complete': return '완료'     // Progress 기존 데이터 호환용
+    case 'completed': return '완료'
+    case 'incompleted': return '미완료'
     default: return status
   }
-}
-
-// 2. 상태 옵션 (변경 가능한 목록)
-const statusOptions = ['completed', 'incompleted']
-
-/* 🔥 상태 변경 Dropdown 관리 */
-const openDropdownId = ref(null)
-
-const toggleDropdown = (id) => {
-  openDropdownId.value = openDropdownId.value === id ? null : id
-}
-
-// [중요] 특정 item의 상태 변경 (데이터 소스: progressData)
-const changeStatus = (id, newStatus, event) => {
-  event.stopPropagation(); 
-
-  // offers 대신 progressData를 찾도록 수정
-  const item = progressData.value.find(o => o.id === id)
-  if (item) item.status = newStatus
-
-  openDropdownId.value = null
 }
 </script>
 
 <style scoped>
-/* Campaign Offers와 동일한 레이아웃 스타일 적용 
-*/
+/* Campaign Offers와 동일한 레이아웃 스타일 적용 */
 
 .progress-table {
   width: 100%;
@@ -365,7 +351,7 @@ tbody tr {
 td {
   padding: 18px 16px; /* Offers와 동일 */
   border: none;
-  vertical-align: middle; /* 기본 정렬 유지 (div로 감싸서 해결) */
+  vertical-align: middle;
   color: #333;
 }
 
@@ -419,11 +405,10 @@ td {
   color: #ccc;
 }
 
-/* [추가/수정] 상태 및 드롭다운 스타일 */
-
+/* 상태 및 배지 스타일 */
 .status-col {
-  position: relative; /* 드롭다운 기준점 */
-  overflow: visible;  /* 드롭다운이 잘리지 않게 설정 */
+  position: relative;
+  overflow: visible;
 }
 
 .status-wrapper {
@@ -432,7 +417,6 @@ td {
 }
 
 .status-badge {
-  /* 기존 스타일 유지 */
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -442,59 +426,11 @@ td {
   background-color: #fff;
   font-size: 13px;
   color: #444;
-  /* 클릭 가능함을 표시 */
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .status-badge:hover {
-  background-color: #f9f9f9; /* 호버 효과 추가 */
-}
-
-/* 드롭다운 박스 스타일 (Offers와 동일) */
-.dropdown {
-  position: absolute;
-  top: 40px; /* 배지 바로 아래 */
-  left: 0;
-  width: 100px;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  z-index: 100;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* 약간의 그림자 추가 추천 */
-}
-
-.dropdown-item {
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 13px;
-  color: #333;
-}
-
-.dropdown-item:hover {
-  background-color: #f5f5f5;
-}
-
-/* 기존 Dot 스타일 유지 */
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-.dot.complete, .dot.completed, .dot.accepted { background-color: #4caf50; } /* 초록 */
-.dot.incomplete, .dot.pending { background-color: #ff9800; } /* 주황/노랑 */
-.dot.rejected { background-color: #f44336; } /* 빨강 */
-
-/* 상태 배지 (Dot 스타일은 Progress 고유 디자인 유지하되 폰트는 통일) */
-.status-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 12px;
-  border: 1px solid #eee;
-  border-radius: 6px; /* Figma 디자인 반영 */
-  background-color: #fff;
-  font-size: 13px;
-  color: #444;
+  background-color: #f9f9f9;
 }
 
 /* 상태 점 (Dot) */
@@ -504,14 +440,13 @@ td {
   border-radius: 50%;
 }
 
-.dot.complete {
+.dot.completed {
   background-color: #4caf50;
 }
 
-.dot.incomplete {
+.dot.incompleted {
   background-color: #f44336;
 }
-
 
 /* Pagination (Offers와 완벽하게 동일한 스타일) */
 .pagination {
