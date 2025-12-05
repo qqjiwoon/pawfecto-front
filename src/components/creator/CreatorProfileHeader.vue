@@ -40,23 +40,7 @@
         <span>Following</span>
       </div>
     </div>
-    
-    <!-- 버튼 -->
-    <div class="btn-wrap">
-      <button
-        :class="['toggle-btn', activeBtn === 'campaigns' ? 'active' : '']"
-        @click="activeBtn = 'campaigns'"
-      >
-        My Campaigns
-      </button>
 
-      <button
-        :class="['toggle-btn', activeBtn === 'settings' ? 'active' : '']"
-        @click="activeBtn = 'settings'"
-      >
-        Settings
-      </button>
-    </div>
 </template>
 
 <script setup>
@@ -69,8 +53,6 @@ const props = defineProps({
   }
 })
 
-// 버튼 선택 상태 (기본값: My Campaigns)
-const activeBtn = ref('campaigns')
 </script>
 
 <style scoped>
