@@ -2,6 +2,8 @@
   <div class="modal-overlay" @click.self="closeModal">
     <div class="modal-container">
 
+      <button class="close-btn" @click="closeModal">×</button>
+
       <h2 class="modal-title">Campaign Progress</h2>
 
       <!-- 제품명 -->
@@ -74,6 +76,10 @@ const save = () => {
   emit('save', localItem.value)
 }
 
+const closeModal = () => {
+  emit('close')
+}
+
 </script>
 
 <style scoped>
@@ -96,12 +102,32 @@ const save = () => {
   padding: 80px 70px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   animation: fadeIn 0.2s ease-out;
+  position: relative; /* X 버튼의 기준점 생성 */
 }
 
 .modal-container,
 .modal-container * {
   box-sizing: border-box;
 }
+
+/* X 버튼 */
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  color: #555;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
 
 /* 제목 */
 .modal-title {
