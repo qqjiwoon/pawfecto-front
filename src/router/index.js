@@ -8,6 +8,7 @@ import SignupCreatorView from '../views/SignupCreatorView.vue'
 import BrandLayout from '@/views/BrandLayout.vue'
 import BrandDashboardView from '@/views/BrandDashboardView.vue'
 import CreateCampaignView from '@/views/CreateCampaignView.vue'
+import CampaignDetailView from '@/views/brand/CampaignDetailView.vue'
 
 // Creator
 import CreatorDashboardView from '@/views/creator/CreatorDashboardView.vue'
@@ -41,17 +42,34 @@ const router = createRouter({
     }, 
     {
       path: '/dashboard/brand',
-      component: BrandLayout,          
+      component: BrandLayout,
       children: [
         {
           path: '',
           name: 'brand-dashboard',
-          component: BrandDashboardView   
+          component: BrandDashboardView
         },
         {
           path: 'create',
           name: 'create-campaign',
-          component: CreateCampaignView   
+          component: CreateCampaignView
+        },
+        {
+          path: 'campaign/:id',
+          name: 'campaign-detail',
+          component: () => import('@/views/brand/CampaignDetailView.vue'),
+          children: [
+            {
+              path: 'recommendations',
+              name: 'campaign-recommendations',
+              component: () => import('@/components/brand/CampaignRecommendations.vue')
+            },
+            {
+              path: 'status',
+              name: 'campaign-status',
+              component: () => import('@/components/brand/CampaignStatus.vue')
+            }
+          ]
         }
       ]
     },

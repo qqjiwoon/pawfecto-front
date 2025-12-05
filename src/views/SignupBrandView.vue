@@ -1,6 +1,16 @@
 <template>
-  <div class="signup-container">
+  <section class="pf-signup-hero">
+    <div class="pf-signup-hero-overlay"></div>
 
+    <h1 class="pf-signup-hero-title">Pawfecto</h1>
+
+    <div class="pf-signup-breadcrumb">
+      <p>Home</p>
+      <span> &gt; </span>
+      <p>Signup</p>
+    </div>
+  </section>
+  <div class="signup-container">
     <h1>Brand Signup</h1>
 
     <h2 class="title">회원 가입</h2>
@@ -23,7 +33,7 @@
     <form @submit.prevent="handleSignup">
       <div class="form-group">
         <label>아이디</label>
-        <input type="text" v-model="form.loginId" required />
+        <input type="text" v-model="form.signupId" required />
       </div>
 
       <div class="form-group">
@@ -79,7 +89,7 @@ const router = useRouter()
 
 const form = ref({
     accountType: 'brand',
-    loginId: '',
+    signupId: '',
     password: '',
     passwordConfirm: '',
     brandName: '',
@@ -105,6 +115,51 @@ watch(
 </script>
 
 <style scoped>
+
+.pf-signup-hero {
+  width: 100%;
+  height: 45vh;
+  background-image: url('@/assets/login-hero.png');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.pf-signup-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.pf-signup-hero-title {
+  position: absolute;
+  bottom: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Rubik Bubbles', sans-serif;
+  font-size: 54px;
+  color: #fff;
+}
+
+.pf-signup-breadcrumb {
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  gap: 6px;
+
+  font-family: inherit; /* Rubik Bubbles 상속 방지 */
+}
+
+.pf-signup-breadcrumb p,
+.pf-signup-breadcrumb span {
+  margin: 0;
+  padding: 0;
+}
+
 
 .signup-container {
   max-width: 480px;
@@ -177,7 +232,7 @@ watch(
   width: 105%;
   padding: 12px;
   margin-top: 50px;
-  background: #000;
+  background: #7b7b7b;
   color: white;
   border: none;
   border-radius: 8px;
@@ -187,7 +242,7 @@ watch(
 }
 
 .submit-btn:hover {
-  background: #222;
+  background: #3A3A3A;
 }
 
 </style>
